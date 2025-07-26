@@ -10,163 +10,171 @@ from tower_climb.core.window import Window
 
 class TestWindowInitialization:
     """UTF-Block-P0-S1-C1-T1: Window Initialization tests."""
-    
+
     def test_window_creates_successfully(self):
         """Test window creates with correct properties."""
         window = Window()
-        
+
         # Mock pygame to avoid actual window creation in tests
-        with patch("pygame.init") as mock_init, \
-             patch("pygame.display.set_mode") as mock_set_mode, \
-             patch("pygame.display.set_caption") as mock_caption, \
-             patch("pygame.time.Clock") as mock_clock:
-            
+        with (
+            patch("pygame.init") as mock_init,
+            patch("pygame.display.set_mode") as mock_set_mode,
+            patch("pygame.display.set_caption") as mock_caption,
+            patch("pygame.time.Clock") as mock_clock,
+        ):
+
             # Setup mocks
             mock_init.return_value = (6, 0)  # 6 modules initialized, 0 failed
             mock_surface = MagicMock()
             mock_set_mode.return_value = mock_surface
-            
+
             # Initialize window
             window.initialize()
-            
+
             # Verify pygame was initialized
             mock_init.assert_called_once()
-            
+
             # Verify window was created with correct size
             mock_set_mode.assert_called_once_with((800, 600))
-            
+
             # Verify title was set
             mock_caption.assert_called_once_with("Tower Climb")
-            
+
             # Verify surface is available
             assert window.get_surface() is mock_surface
             assert window.is_running
-            
+
     def test_window_custom_properties(self):
         """Test window with custom size and title."""
         window = Window(width=1024, height=768, title="Test Game")
-        
-        with patch("pygame.init") as mock_init, \
-             patch("pygame.display.set_mode") as mock_set_mode, \
-             patch("pygame.display.set_caption") as mock_caption, \
-             patch("pygame.time.Clock"):
-            
+
+        with (
+            patch("pygame.init") as mock_init,
+            patch("pygame.display.set_mode") as mock_set_mode,
+            patch("pygame.display.set_caption") as mock_caption,
+            patch("pygame.time.Clock"),
+        ):
+
             mock_init.return_value = (6, 0)
-            
+
             window.initialize()
-            
+
             mock_set_mode.assert_called_once_with((1024, 768))
             mock_caption.assert_called_once_with("Test Game")
-            
+
     def test_pygame_init_failed(self):
         """Test handling of pygame initialization failure."""
         window = Window()
-        
+
         with patch("pygame.init") as mock_init:
             # Simulate initialization failure
             mock_init.return_value = (4, 2)  # 2 modules failed
-            
+
             with pytest.raises(RuntimeError) as exc_info:
                 window.initialize()
-                
+
             assert "PYGAME_INIT_FAILED" in str(exc_info.value)
-            
+
     def test_display_mode_unsupported(self):
         """Test handling of unsupported display mode."""
         window = Window()
-        
-        with patch("pygame.init") as mock_init, \
-             patch("pygame.display.set_mode") as mock_set_mode:
-            
+
+        with (
+            patch("pygame.init") as mock_init,
+            patch("pygame.display.set_mode") as mock_set_mode,
+        ):
+
             mock_init.return_value = (6, 0)
             mock_set_mode.side_effect = pygame.error("Display mode not supported")
-            
+
             with pytest.raises(RuntimeError) as exc_info:
                 window.initialize()
-                
+
             assert "DISPLAY_MODE_UNSUPPORTED" in str(exc_info.value)
 
 
 class TestWindowCloseEvent:
     """UTF-Block-P0-S1-C1-T2: Window Close Event tests."""
-    
+
     def test_quit_event_handled(self):
         """Test window handles QUIT event properly."""
         window = Window()
-        
+
         # Create mock QUIT event
         quit_event = Mock()
         quit_event.type = pygame.QUIT
-        
+
         with patch("pygame.event.get") as mock_get:
             mock_get.return_value = [quit_event]
-            
+
             # Should return False when QUIT event detected
             assert not window.handle_events()
-            
+
     def test_other_events_ignored(self):
         """Test window ignores non-QUIT events."""
         window = Window()
-        
+
         # Create mock keyboard event
         key_event = Mock()
         key_event.type = pygame.KEYDOWN
-        
+
         with patch("pygame.event.get") as mock_get:
             mock_get.return_value = [key_event]
-            
+
             # Should return True for non-QUIT events
             assert window.handle_events()
-            
+
     def test_quit_cleanup(self):
         """Test window cleanup on quit."""
         window = Window()
         window._running = True
-        
+
         with patch("pygame.quit") as mock_quit:
             window.quit()
-            
+
             # Verify pygame.quit was called
             mock_quit.assert_called_once()
-            
+
             # Verify running flag cleared
             assert not window.is_running
 
 
 class TestWindowProperties:
     """UTF-Block-P0-S1-C1-T3: Window Properties tests."""
-    
+
     def test_window_dimensions(self):
         """Test window has correct dimensions."""
         window = Window()
         assert window.width == 800
         assert window.height == 600
-        
+
     def test_window_not_fullscreen(self):
         """Test window is not fullscreen (MVP requirement)."""
         window = Window()
-        
-        with patch("pygame.init") as mock_init, \
-             patch("pygame.display.set_mode") as mock_set_mode, \
-             patch("pygame.display.set_caption"), \
-             patch("pygame.time.Clock"):
-            
+
+        with (
+            patch("pygame.init") as mock_init,
+            patch("pygame.display.set_mode") as mock_set_mode,
+            patch("pygame.display.set_caption"),
+            patch("pygame.time.Clock"),
+        ):
+
             mock_init.return_value = (6, 0)  # Proper return format
             window.initialize()
-            
+
             # Verify windowed mode (no fullscreen flags)
             mock_set_mode.assert_called_once_with((800, 600))
-            
+
     def test_clear_and_present(self):
         """Test clear and present methods."""
         window = Window()
         mock_surface = MagicMock()
         window._screen = mock_surface
-        
+
         # Test clear
         window.clear((255, 0, 0))
         mock_surface.fill.assert_called_once_with((255, 0, 0))
-        
+
         # Test present
         with patch("pygame.display.flip") as mock_flip:
             window.present()
