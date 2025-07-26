@@ -5,6 +5,17 @@ All notable changes to Tower Climb will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2025-07-26
+
+### Added
+- FPS counter with rolling window averaging (P0-S1-C3)
+- Debug display with semi-transparent background
+- Toggle functionality (F3 ready for integration)
+- Cached rendering for performance
+
+### Changed
+- Coverage requirement relaxed from 90% to 80%
+
 ## [0.1.2] - 2025-07-26
 
 ### Added
