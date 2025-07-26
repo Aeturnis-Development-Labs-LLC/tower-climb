@@ -11,7 +11,7 @@ from tower_climb.core.fps_counter import FPSCounter
 class DebugDisplay:
     """Manages debug information display."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize debug display system."""
         self._visible = False
         self._fps_counter = FPSCounter(update_interval=1.0)
