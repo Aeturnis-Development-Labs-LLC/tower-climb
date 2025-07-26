@@ -19,20 +19,20 @@ def main():
     """Set up the development environment."""
     print("Tower Climb - Development Setup")
     print("=" * 40)
-    
+
     # Check Python version
     if sys.version_info < (3, 11):
         print("ERROR: Python 3.11+ required")
         return 1
-    
+
     print(f"Python {sys.version}")
-    
+
     # Create virtual environment if it doesn't exist
     venv_path = Path("venv")
     if not venv_path.exists():
         print("\nCreating virtual environment...")
         run_command([sys.executable, "-m", "venv", "venv"])
-    
+
     # Determine pip path
     if sys.platform == "win32":
         pip = Path("venv/Scripts/pip.exe")
@@ -40,50 +40,55 @@ def main():
     else:
         pip = Path("venv/bin/pip")
         python = Path("venv/bin/python")
-    
+
     if not pip.exists():
         print("ERROR: Virtual environment not properly created")
         return 1
-    
+
     # Upgrade pip
     print("\nUpgrading pip...")
     run_command([str(python), "-m", "pip", "install", "--upgrade", "pip"])
-    
+
     # Install package in development mode
     print("\nInstalling tower-climb in development mode...")
     run_command([str(pip), "install", "-e", ".[dev]"])
-    
+
     # Run initial quality checks
     print("\nRunning initial quality checks...")
-    
+
     # Format check
     print("\n1. Checking code formatting...")
-    if run_command([str(python), "-m", "black", "--check", "src", "tests"], check=False) != 0:
+    if (
+        run_command(
+            [str(python), "-m", "black", "--check", "src", "tests"], check=False
+        )
+        != 0
+    ):
         print("   → Run 'make format' to fix formatting")
     else:
         print("   ✓ Formatting OK")
-    
+
     # Lint check
     print("\n2. Running linter...")
     if run_command([str(python), "-m", "flake8", "src", "tests"], check=False) != 0:
         print("   → Some linting issues found")
     else:
         print("   ✓ Linting OK")
-    
+
     # Type check
     print("\n3. Running type checker...")
     if run_command([str(python), "-m", "mypy", "src"], check=False) != 0:
         print("   → Some type issues found")
     else:
         print("   ✓ Type checking OK")
-    
+
     # Run tests
     print("\n4. Running tests...")
     if run_command([str(python), "-m", "pytest", "-v"], check=False) != 0:
         print("   → Some tests failed")
     else:
         print("   ✓ All tests passed")
-    
+
     print("\n" + "=" * 40)
     print("Setup complete!")
     print("\nNext steps:")
@@ -98,7 +103,7 @@ def main():
     print("   pytest")
     print("4. Check code quality:")
     print("   make quality")
-    
+
     return 0
 
 

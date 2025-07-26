@@ -19,9 +19,12 @@ PLAYER_DARK_BLUE = (32, 64, 180)
 SKIN_TONE = (255, 220, 177)
 DARK_SKIN = (220, 180, 140)
 
-def draw_simple_human(screen, x: int, y: int, facing_angle: float = 0, scale: float = 1.0):
+
+def draw_simple_human(
+    screen, x: int, y: int, facing_angle: float = 0, scale: float = 1.0
+):
     """Draw a simple human figure using basic shapes.
-    
+
     Args:
         x, y: Center position
         facing_angle: Direction in radians (0 = right)
@@ -30,134 +33,189 @@ def draw_simple_human(screen, x: int, y: int, facing_angle: float = 0, scale: fl
     # Body (rectangle/ellipse)
     body_width = int(16 * scale)
     body_height = int(20 * scale)
-    body_rect = pygame.Rect(x - body_width//2, y - body_height//2 + 5, body_width, body_height)
+    body_rect = pygame.Rect(
+        x - body_width // 2, y - body_height // 2 + 5, body_width, body_height
+    )
     pygame.draw.ellipse(screen, PLAYER_BLUE, body_rect)
     pygame.draw.ellipse(screen, PLAYER_DARK_BLUE, body_rect, 2)
-    
+
     # Head (circle)
     head_radius = int(8 * scale)
-    head_y = y - body_height//2 - head_radius//2 + 3
+    head_y = y - body_height // 2 - head_radius // 2 + 3
     pygame.draw.circle(screen, SKIN_TONE, (x, head_y), head_radius)
     pygame.draw.circle(screen, DARK_SKIN, (x, head_y), head_radius, 2)
-    
+
     # Eyes (small dots)
     eye_offset = int(3 * scale)
     eye_y = head_y - 1
     pygame.draw.circle(screen, BLACK, (x - eye_offset, eye_y), 2)
     pygame.draw.circle(screen, BLACK, (x + eye_offset, eye_y), 2)
-    
+
     # Arms (lines/small rectangles)
     arm_length = int(12 * scale)
     arm_y = y - 5
     # Left arm
-    arm_end_x = x - body_width//2 - arm_length
-    pygame.draw.line(screen, SKIN_TONE, (x - body_width//2, arm_y), (arm_end_x, arm_y + 5), 3)
+    arm_end_x = x - body_width // 2 - arm_length
+    pygame.draw.line(
+        screen, SKIN_TONE, (x - body_width // 2, arm_y), (arm_end_x, arm_y + 5), 3
+    )
     # Right arm
-    arm_end_x = x + body_width//2 + arm_length
-    pygame.draw.line(screen, SKIN_TONE, (x + body_width//2, arm_y), (arm_end_x, arm_y + 5), 3)
-    
+    arm_end_x = x + body_width // 2 + arm_length
+    pygame.draw.line(
+        screen, SKIN_TONE, (x + body_width // 2, arm_y), (arm_end_x, arm_y + 5), 3
+    )
+
     # Legs (small rectangles)
     leg_width = int(4 * scale)
     leg_height = int(10 * scale)
-    leg_y = y + body_height//2 - 5
+    leg_y = y + body_height // 2 - 5
     # Left leg
-    pygame.draw.rect(screen, PLAYER_DARK_BLUE, (x - body_width//3 - leg_width//2, leg_y, leg_width, leg_height))
+    pygame.draw.rect(
+        screen,
+        PLAYER_DARK_BLUE,
+        (x - body_width // 3 - leg_width // 2, leg_y, leg_width, leg_height),
+    )
     # Right leg
-    pygame.draw.rect(screen, PLAYER_DARK_BLUE, (x + body_width//3 - leg_width//2, leg_y, leg_width, leg_height))
-    
+    pygame.draw.rect(
+        screen,
+        PLAYER_DARK_BLUE,
+        (x + body_width // 3 - leg_width // 2, leg_y, leg_width, leg_height),
+    )
+
     # Direction indicator (small triangle in front)
     if facing_angle != 0:
         indicator_dist = int(20 * scale)
         ind_x = x + math.cos(facing_angle) * indicator_dist
         ind_y = y + math.sin(facing_angle) * indicator_dist
-        
+
         # Small triangle pointing outward
         size = 4
         points = [
-            (ind_x + math.cos(facing_angle) * size, ind_y + math.sin(facing_angle) * size),
-            (ind_x + math.cos(facing_angle + 2.356) * size, ind_y + math.sin(facing_angle + 2.356) * size),
-            (ind_x + math.cos(facing_angle - 2.356) * size, ind_y + math.sin(facing_angle - 2.356) * size)
+            (
+                ind_x + math.cos(facing_angle) * size,
+                ind_y + math.sin(facing_angle) * size,
+            ),
+            (
+                ind_x + math.cos(facing_angle + 2.356) * size,
+                ind_y + math.sin(facing_angle + 2.356) * size,
+            ),
+            (
+                ind_x + math.cos(facing_angle - 2.356) * size,
+                ind_y + math.sin(facing_angle - 2.356) * size,
+            ),
         ]
         pygame.draw.polygon(screen, WHITE, points)
 
-def draw_stylized_human(screen, x: int, y: int, facing_angle: float = 0, scale: float = 1.0):
+
+def draw_stylized_human(
+    screen, x: int, y: int, facing_angle: float = 0, scale: float = 1.0
+):
     """Draw a more stylized version with better proportions."""
     # Torso (rounded rectangle)
     torso_width = int(14 * scale)
     torso_height = int(16 * scale)
-    torso_rect = pygame.Rect(x - torso_width//2, y - torso_height//2 + 2, torso_width, torso_height)
-    
+    torso_rect = pygame.Rect(
+        x - torso_width // 2, y - torso_height // 2 + 2, torso_width, torso_height
+    )
+
     # Draw torso with rounded edges
     pygame.draw.ellipse(screen, PLAYER_BLUE, torso_rect)
-    
+
     # Shoulders (wider oval)
-    shoulder_rect = pygame.Rect(x - torso_width//2 - 2, y - torso_height//2, torso_width + 4, 8)
+    shoulder_rect = pygame.Rect(
+        x - torso_width // 2 - 2, y - torso_height // 2, torso_width + 4, 8
+    )
     pygame.draw.ellipse(screen, PLAYER_DARK_BLUE, shoulder_rect)
-    
+
     # Head
     head_radius = int(6 * scale)
-    head_y = y - torso_height//2 - head_radius + 2
+    head_y = y - torso_height // 2 - head_radius + 2
     pygame.draw.circle(screen, SKIN_TONE, (x, head_y), head_radius)
-    
+
     # Simple face
     # Eyes
     pygame.draw.circle(screen, BLACK, (x - 2, head_y - 1), 1)
     pygame.draw.circle(screen, BLACK, (x + 2, head_y - 1), 1)
-    
+
     # Arms (capsule shaped)
     arm_length = int(10 * scale)
-    arm_y = y - torso_height//2 + 4
-    
-    # Left arm  
+    arm_y = y - torso_height // 2 + 4
+
+    # Left arm
     for i in range(3):
         offset = i - 1
-        pygame.draw.line(screen, SKIN_TONE, 
-                        (x - torso_width//2 - 1, arm_y + offset), 
-                        (x - torso_width//2 - arm_length, arm_y + 6 + offset), 2)
-    
+        pygame.draw.line(
+            screen,
+            SKIN_TONE,
+            (x - torso_width // 2 - 1, arm_y + offset),
+            (x - torso_width // 2 - arm_length, arm_y + 6 + offset),
+            2,
+        )
+
     # Right arm
     for i in range(3):
         offset = i - 1
-        pygame.draw.line(screen, SKIN_TONE, 
-                        (x + torso_width//2 + 1, arm_y + offset), 
-                        (x + torso_width//2 + arm_length, arm_y + 6 + offset), 2)
-    
+        pygame.draw.line(
+            screen,
+            SKIN_TONE,
+            (x + torso_width // 2 + 1, arm_y + offset),
+            (x + torso_width // 2 + arm_length, arm_y + 6 + offset),
+            2,
+        )
+
     # Legs
     leg_spacing = int(5 * scale)
-    leg_y = y + torso_height//2 - 3
-    
+    leg_y = y + torso_height // 2 - 3
+
     # Left leg
     for i in range(3):
-        pygame.draw.line(screen, PLAYER_DARK_BLUE,
-                        (x - leg_spacing + i - 1, leg_y),
-                        (x - leg_spacing + i - 1, leg_y + 10), 2)
-    
-    # Right leg  
-    for i in range(3):
-        pygame.draw.line(screen, PLAYER_DARK_BLUE,
-                        (x + leg_spacing + i - 1, leg_y),
-                        (x + leg_spacing + i - 1, leg_y + 10), 2)
+        pygame.draw.line(
+            screen,
+            PLAYER_DARK_BLUE,
+            (x - leg_spacing + i - 1, leg_y),
+            (x - leg_spacing + i - 1, leg_y + 10),
+            2,
+        )
 
-def draw_minimalist_human(screen, x: int, y: int, facing_angle: float = 0, scale: float = 1.0):
+    # Right leg
+    for i in range(3):
+        pygame.draw.line(
+            screen,
+            PLAYER_DARK_BLUE,
+            (x + leg_spacing + i - 1, leg_y),
+            (x + leg_spacing + i - 1, leg_y + 10),
+            2,
+        )
+
+
+def draw_minimalist_human(
+    screen, x: int, y: int, facing_angle: float = 0, scale: float = 1.0
+):
     """Ultra-simple but recognizable human shape."""
     # Body (pill shape)
     body_height = int(24 * scale)
     body_width = int(10 * scale)
-    
+
     # Draw body as overlapping circles and rectangle
-    body_rect = pygame.Rect(x - body_width//2, y - body_height//2 + 8, body_width, body_height - 8)
+    body_rect = pygame.Rect(
+        x - body_width // 2, y - body_height // 2 + 8, body_width, body_height - 8
+    )
     pygame.draw.rect(screen, PLAYER_BLUE, body_rect)
-    pygame.draw.circle(screen, PLAYER_BLUE, (x, y - body_height//2 + 8), body_width//2)
-    pygame.draw.circle(screen, PLAYER_BLUE, (x, y + body_height//2 - 8), body_width//2)
-    
+    pygame.draw.circle(
+        screen, PLAYER_BLUE, (x, y - body_height // 2 + 8), body_width // 2
+    )
+    pygame.draw.circle(
+        screen, PLAYER_BLUE, (x, y + body_height // 2 - 8), body_width // 2
+    )
+
     # Head
     head_radius = int(5 * scale)
-    pygame.draw.circle(screen, SKIN_TONE, (x, y - body_height//2), head_radius)
-    
+    pygame.draw.circle(screen, SKIN_TONE, (x, y - body_height // 2), head_radius)
+
     # Face dots
-    pygame.draw.circle(screen, BLACK, (x - 2, y - body_height//2), 1)
-    pygame.draw.circle(screen, BLACK, (x + 2, y - body_height//2), 1)
-    
+    pygame.draw.circle(screen, BLACK, (x - 2, y - body_height // 2), 1)
+    pygame.draw.circle(screen, BLACK, (x + 2, y - body_height // 2), 1)
+
     # Weapon/tool in hand (to show facing)
     if facing_angle is not None:
         weapon_length = int(15 * scale)
@@ -166,6 +224,7 @@ def draw_minimalist_human(screen, x: int, y: int, facing_angle: float = 0, scale
         pygame.draw.line(screen, WHITE, (x, y), (weapon_x, weapon_y), 3)
         # Weapon tip
         pygame.draw.circle(screen, WHITE, (int(weapon_x), int(weapon_y)), 2)
+
 
 # Main loop
 running = True
@@ -180,24 +239,24 @@ while running:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 design_type = (design_type + 1) % 3
-    
+
     # Update
     angle += 0.02
-    
+
     # Draw
     screen.fill(BLACK)
-    
+
     # Draw grid for reference
     for x in range(0, 800, 32):
         pygame.draw.line(screen, (20, 20, 20), (x, 0), (x, 600), 1)
     for y in range(0, 600, 32):
         pygame.draw.line(screen, (20, 20, 20), (0, y), (800, y), 1)
-    
+
     # Draw different scales
     y_pos = 300
     scales = [0.5, 1.0, 1.5, 2.0]
     x_positions = [150, 300, 450, 600]
-    
+
     for i, (x_pos, scale) in enumerate(zip(x_positions, scales)):
         if design_type == 0:
             draw_simple_human(screen, x_pos, y_pos, angle, scale)
@@ -205,17 +264,19 @@ while running:
             draw_stylized_human(screen, x_pos, y_pos, angle, scale)
         else:
             draw_minimalist_human(screen, x_pos, y_pos, angle, scale)
-    
+
     # UI text
     font = pygame.font.Font(None, 36)
-    text = font.render(f"Design: {designs[design_type]} (Press SPACE to change)", True, WHITE)
+    text = font.render(
+        f"Design: {designs[design_type]} (Press SPACE to change)", True, WHITE
+    )
     screen.blit(text, (10, 10))
-    
+
     scale_font = pygame.font.Font(None, 24)
     for i, (x_pos, scale) in enumerate(zip(x_positions, scales)):
         scale_text = scale_font.render(f"{scale}x", True, WHITE)
         screen.blit(scale_text, (x_pos - 15, y_pos + 40))
-    
+
     pygame.display.flip()
     clock.tick(60)
 
