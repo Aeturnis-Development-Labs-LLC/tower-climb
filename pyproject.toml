@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tower-climb"
-version = "0.1.3"
+version = "0.1.4"
 description = "A roguelike tower climbing game"
 readme = "README.md"
 requires-python = ">=3.11"
-license = {text = "MIT"}
+license = {text = "CC BY-NC 4.0"}
 authors = [
     {name = "Aeturnis Development Labs", email = "projects@aeturnis.dev"}
 ]
