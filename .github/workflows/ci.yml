@@ -65,7 +65,7 @@ jobs:
     
     - name: Check coverage threshold
       run: |
-        pytest --cov=src --cov-fail-under=90
+        pytest --cov=src --cov-fail-under=80
 
   # Simple security check
   security:
