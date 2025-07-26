@@ -81,3 +81,7 @@ docs/_templates/
 velocity_metrics/
 session_state_*.json
 SESSION_CHECKPOINT_*.json
+.velocity/
+
+# Windows specific
+nul
