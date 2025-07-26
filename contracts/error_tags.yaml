@@ -1,0 +1,83 @@
+# Error Tags Registry for Tower Climb
+# All error tags must be in SCREAMING_SNAKE_CASE
+# Format: TAG_NAME: "Description"
+
+# Window and Display Errors (P0-S1)
+PYGAME_INIT_FAILED: "Pygame initialization failed"
+DISPLAY_MODE_UNSUPPORTED: "Requested display mode not available"
+EVENT_HANDLER_MISSING: "No handler for required event type"
+CLEANUP_FAILED: "Error during shutdown sequence"
+INVALID_WINDOW_SIZE: "Window dimensions invalid"
+PROPERTY_MISMATCH: "Window property doesn't match specification"
+
+# Game Loop Errors (P0-S1-C2)
+FRAMERATE_UNSTABLE: "FPS varies more than ±5 from target"
+TIMING_DRIFT: "Clock drift detected over time"
+STATE_TRANSITION_FAILED: "Error during state change"
+STATE_UPDATE_SKIPPED: "State update missed"
+SHUTDOWN_TIMEOUT: "Loop failed to terminate quickly"
+RESOURCE_LEAK: "Memory/handles not released"
+DELTA_TIME_INVALID: "Delta time calculation error"
+TIME_ACCUMULATOR_OVERFLOW: "Fixed timestep accumulator overflow"
+
+# Debug Display Errors (P0-S1-C3)
+FPS_CALC_ERROR: "FPS calculation produced invalid result"
+UPDATE_RATE_WRONG: "FPS updates too fast/slow"
+RENDER_POSITION_INVALID: "Debug text rendered off-screen"
+TEXT_UNREADABLE: "Font/color makes text illegible"
+PERFORMANCE_IMPACT_HIGH: "Debug display hurts performance"
+MEMORY_LEAK_DETECTED: "Text surfaces not freed"
+TOGGLE_FAILED: "Toggle mechanism not working"
+STATE_CORRUPTION: "Toggle corrupted game state"
+
+# State Machine Errors (P0-S2-C1)
+NO_INITIAL_STATE: "State machine has no starting state"
+STATE_INIT_FAILED: "State initialization error"
+TRANSITION_INTERRUPTED: "State change was interrupted"
+STATE_LEAK: "Previous state not properly cleaned"
+STACK_OVERFLOW: "State stack exceeded maximum depth"
+STACK_UNDERFLOW: "Pop called on empty stack"
+STATE_LOST: "State reference lost during transition"
+INVALID_STATE: "Attempted to set invalid state"
+NULL_STATE_ERROR: "Null/None state provided"
+
+# Input Handling Errors (P0-S2-C2)
+KEY_PRESS_MISSED: "Key press event not detected"
+KEY_STATE_STUCK: "Key stuck in pressed/held state"
+KEY_CONFLICT: "Multiple keys causing conflicts"
+INPUT_BUFFER_OVERFLOW: "Too many simultaneous inputs"
+ACTION_NOT_MAPPED: "Action has no key mapping"
+INVALID_KEY_CODE: "Invalid pygame key constant"
+EVENT_QUEUE_FULL: "Event queue exceeded capacity"
+EVENT_LOST: "Input event was dropped"
+
+# Rendering Errors (P0-S3)
+INVALID_RECT_PARAMS: "Rectangle parameters invalid"
+DRAW_FAILED: "Drawing operation failed"
+INVALID_CIRCLE_PARAMS: "Circle parameters invalid"
+RADIUS_NEGATIVE: "Circle radius is negative"
+INVALID_LINE_PARAMS: "Line parameters invalid"
+WIDTH_INVALID: "Line/border width invalid"
+OUTLINE_WIDTH_INVALID: "Outline width out of range"
+FILL_MODE_ERROR: "Fill/outline mode conflict"
+COLOR_OUT_OF_RANGE: "Color values not in 0-255"
+
+# Text Rendering Errors (P0-S3-C2)
+FONT_LOAD_FAILED: "Could not load font file"
+TEXT_RENDER_FAILED: "Text rendering error"
+INVALID_FONT_SIZE: "Font size out of valid range"
+FONT_CACHE_MISS: "Font not in cache"
+INVALID_ALIGNMENT: "Unknown alignment value"
+ALIGNMENT_CALC_ERROR: "Error calculating text position"
+GLYPH_NOT_FOUND: "Character not in font"
+ENCODING_ERROR: "Text encoding issue"
+
+# Camera Errors (P0-S3-C3)
+TRANSFORM_ERROR: "Coordinate transformation failed"
+POSITION_INVALID: "Camera position is invalid (NaN/Inf)"
+TRANSFORM_MATH_ERROR: "Mathematical error in transform"
+COORDINATE_OVERFLOW: "Coordinates exceed safe range"
+FOLLOW_TARGET_NULL: "No target to follow"
+SMOOTHING_FAILED: "Smooth follow calculation error"
+CULLING_INCORRECT: "Visibility check gave wrong result"
+PERFORMANCE_ISSUE: "Operation taking too long"
