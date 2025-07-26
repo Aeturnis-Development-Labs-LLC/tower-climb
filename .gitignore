@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+htmlcov/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Game specific
+saves/
+logs/
+*.save
+*.log
+
+# Documentation
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# Temporary
+*.tmp
+*.bak
+.temp/
+
+# Security
+.env
+.env.local
+*.key
+*.pem
+
+# AI/CAFE specific
+velocity_metrics/
+session_state_*.json
+SESSION_CHECKPOINT_*.json
