@@ -1,6 +1,6 @@
 # Tower Climb
 
-[![Version](https://img.shields.io/badge/version-0.1.2-blue)](https://github.com/Aeturnis-Development-Labs-LLC/tower-climb)
+[![Version](https://img.shields.io/badge/version-0.1.3-blue)](https://github.com/Aeturnis-Development-Labs-LLC/tower-climb)
 [![Build Status](https://github.com/Aeturnis-Development-Labs-LLC/tower-climb/actions/workflows/ci.yml/badge.svg)](https://github.com/Aeturnis-Development-Labs-LLC/tower-climb/actions)
 [![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](htmlcov/index.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -10,11 +10,11 @@
 A roguelike tower climbing game built with CAFE v5.1-ACG methodology.
 
 ## Project Status
-- **Version**: 0.1.2
+- **Version**: 0.1.3
 - **Phase**: 0 - Project Initialization
 - **Methodology**: CAFE v5.1-ACG
 - **Started**: 2025-07-26
-- **Contracts Completed**: 2/9 (P0-S1-C1 ✓, P0-S1-C2 ✓)
+- **Contracts Completed**: 3/9 (P0-S1-C1 ✓, P0-S1-C2 ✓, P0-S1-C3 ✓)
 
 ## Overview
 Tower Climb is a procedurally generated tower climbing game where players ascend an infinite tower, facing increasingly difficult challenges.
@@ -82,6 +82,7 @@ python -m mypy src
 
 ## Version History
 
+- **v0.1.3** - P0-S1-C3: FPS Counter and Debug Display
 - **v0.1.2** - P0-S1-C2: Main Game Loop implementation
 - **v0.1.1** - P0-S1-C1: Window Creation implementation
 - **v0.1.0** - Initial project setup

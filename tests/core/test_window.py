@@ -39,7 +39,7 @@ class TestWindowInitialization:
             mock_set_mode.assert_called_once_with((800, 600))
 
             # Verify title was set (with version)
-            mock_caption.assert_called_once_with("Tower Climb v0.1.2")
+            mock_caption.assert_called_once_with("Tower Climb v0.1.3")
 
             # Verify surface is available
             assert window.get_surface() is mock_surface
@@ -61,7 +61,7 @@ class TestWindowInitialization:
             window.initialize()
 
             mock_set_mode.assert_called_once_with((1024, 768))
-            mock_caption.assert_called_once_with("Test Game v0.1.2")
+            mock_caption.assert_called_once_with("Test Game v0.1.3")
 
     def test_pygame_init_failed(self):
         """Test handling of pygame initialization failure."""

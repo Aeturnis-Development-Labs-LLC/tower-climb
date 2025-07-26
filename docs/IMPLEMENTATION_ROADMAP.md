@@ -11,22 +11,21 @@ Following CAFE v5.1-ACG principles:
 
 ## Phase 0: Core Systems (Target: 2-3 days)
 
-### Day 1: Window and Rendering
+### Day 1: Core Game Systems
 **Morning**
-- [ ] P0-S1-C1: Create Pygame window
-- [ ] P0-S1-C2: Basic render loop
-- [ ] P0-S1-C3: FPS limiting to 60
+- [x] P0-S1-C1: Create Pygame window
+- [x] P0-S1-C2: Main game loop
+- [x] P0-S1-C3: FPS counter and debug display
 
 **Afternoon**
-- [ ] P0-S3-C1: Draw basic shapes
-- [ ] P0-S3-C2: Load and draw sprites
-- [ ] P0-S3-C3: Basic camera (centered view)
+- [ ] P0-S2-C1: State management system
+- [ ] P0-S2-C2: Input handling system
 
-### Day 2: Game Architecture  
+### Day 2: Rendering and Display
 **Morning**
-- [ ] P0-S2-C1: Main game loop
-- [ ] P0-S2-C2: State management system
-- [ ] P0-S2-C3: Keyboard input handler
+- [ ] P0-S3-C1: Draw basic shapes
+- [ ] P0-S3-C2: Text rendering system
+- [ ] P0-S3-C3: Basic camera (centered view)
 
 **Afternoon**
 - [ ] Integration testing
