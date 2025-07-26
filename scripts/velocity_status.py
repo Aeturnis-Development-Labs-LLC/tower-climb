@@ -4,102 +4,111 @@
 
 import sys
 from pathlib import Path
+
 sys.path.append(str(Path(__file__).parent.parent))
 
 from scripts.velocity_integration import get_tracker
 
+
 def show_status():
     """Display detailed session status."""
     tracker = get_tracker()
-    
+
     print("=== CAFE Velocity Tracker Status ===\n")
     print(f"Session ID: {tracker.session.session_id}")
     print(f"Data Directory: {Path(tracker.session.data_dir).absolute()}")
-    
+
     # Get session data
     session_data = tracker.session.data
-    start_time = session_data.get('start_time', 'Unknown')
+    start_time = session_data.get("start_time", "Unknown")
     print(f"Session Started: {start_time}")
     print(f"Session Active: {session_data.get('is_active', False)}")
-    
+
     # Generate report
     report = tracker.generate_report()
-    
+
     # Also check raw session data if report is empty
-    if not report or 'summary' not in report:
+    if not report or "summary" not in report:
         # Use session data directly
-        contracts = session_data.get('contracts', {})
-        metadata = session_data.get('metadata', {})
-        
+        contracts = session_data.get("contracts", {})
+        metadata = session_data.get("metadata", {})
+
         print(f"\n--- Summary ---")
         print(f"Total Contracts: {metadata.get('total_contracts', 0)}")
         print(f"Completed: {metadata.get('completed_contracts', 0)}")
         print(f"Total Regenerations: {metadata.get('total_regenerations', 0)}")
-        
+
         if contracts:
             print(f"\n--- Contracts ---")
             for contract_id, contract_data in contracts.items():
                 print(f"Contract ID: {contract_id}")
                 print(f"  Status: {contract_data.get('status', 'unknown')}")
-                if contract_data.get('test_coverage'):
+                if contract_data.get("test_coverage"):
                     print(f"  Coverage: {contract_data['test_coverage']}%")
-                if contract_data.get('duration_minutes'):
-                    print(f"  Duration: {contract_data['duration_minutes']:.2f} minutes")
-                if contract_data.get('regenerations'):
+                if contract_data.get("duration_minutes"):
+                    print(
+                        f"  Duration: {contract_data['duration_minutes']:.2f} minutes"
+                    )
+                if contract_data.get("regenerations"):
                     print(f"  Regenerations: {contract_data['regenerations']}")
-        
+
         print("\n[INFO] This is a continuous session - it persists across script runs")
         return
-    
+
     if report:
         # Summary
-        if 'summary' in report:
-            summary = report['summary']
+        if "summary" in report:
+            summary = report["summary"]
             print(f"\n--- Summary ---")
             print(f"Total Contracts: {summary.get('total_contracts', 0)}")
             print(f"Completed: {summary.get('completed', 0)}")
             print(f"In Progress: {summary.get('in_progress', 0)}")
             print(f"Paused: {summary.get('paused', 0)}")
-            
+
         # Metrics
-        if 'metrics' in report:
-            metrics = report['metrics']
+        if "metrics" in report:
+            metrics = report["metrics"]
             print(f"\n--- Velocity Metrics ---")
-            if metrics.get('avg_time_per_contract'):
+            if metrics.get("avg_time_per_contract"):
                 print(f"Avg Time/Contract: {metrics['avg_time_per_contract']}")
-            if metrics.get('total_regenerations') is not None:
+            if metrics.get("total_regenerations") is not None:
                 print(f"Total Regenerations: {metrics['total_regenerations']}")
-            if metrics.get('regeneration_rate') is not None:
+            if metrics.get("regeneration_rate") is not None:
                 print(f"Regeneration Rate: {metrics['regeneration_rate']:.1%}")
-            if metrics.get('contracts_per_hour'):
+            if metrics.get("contracts_per_hour"):
                 print(f"Contracts/Hour: {metrics['contracts_per_hour']:.2f}")
-                
+
         # Active contracts
-        if 'contracts' in report:
-            active = [c for c in report['contracts'] if c.get('status') == 'in_progress']
+        if "contracts" in report:
+            active = [
+                c for c in report["contracts"] if c.get("status") == "in_progress"
+            ]
             if active:
                 print(f"\n--- Active Contracts ---")
                 for contract in active:
                     print(f"Contract ID: {contract['contract_id']}")
-                    if 'start_time' in contract:
+                    if "start_time" in contract:
                         print(f"  Started: {contract['start_time']}")
-                    if 'regenerations' in contract:
+                    if "regenerations" in contract:
                         print(f"  Regenerations: {contract['regenerations']}")
-                        
+
             # Recent completions
-            completed = [c for c in report['contracts'] if c.get('status') == 'completed']
+            completed = [
+                c for c in report["contracts"] if c.get("status") == "completed"
+            ]
             if completed:
                 print(f"\n--- Recent Completions ---")
                 for contract in completed[-3:]:  # Last 3
                     print(f"Contract ID: {contract['contract_id']}")
-                    if 'coverage' in contract:
+                    if "coverage" in contract:
                         print(f"  Coverage: {contract['coverage']}%")
-                    if 'duration_minutes' in contract:
+                    if "duration_minutes" in contract:
                         print(f"  Duration: {contract['duration_minutes']:.1f} minutes")
-                    if 'regenerations' in contract:
+                    if "regenerations" in contract:
                         print(f"  Regenerations: {contract['regenerations']}")
-    
+
     print("\n[INFO] This is a continuous session - it persists across script runs")
+
 
 if __name__ == "__main__":
     show_status()

@@ -4,37 +4,40 @@
 
 import sys
 from pathlib import Path
+
 sys.path.append(str(Path(__file__).parent.parent))
 
 from scripts.velocity_integration import get_tracker
 import time
 
+
 def example_contract_implementation():
     """Example showing manual velocity tracking."""
     tracker = get_tracker()
-    
+
     # Start tracking a contract
     contract_id = "P0-S1-C1"
     print(f"[INFO] Starting work on contract {contract_id}")
     tracker.start_contract(contract_id)
-    
+
     # Simulate some work
     print("[INFO] Implementing feature...")
     time.sleep(2)  # Pretend we're coding
-    
+
     # Track a regeneration (when we need to fix something)
     print("[INFO] Found issue, regenerating...")
     tracker.add_regeneration(contract_id, "Type error in validation logic")
     time.sleep(1)  # Fix the issue
-    
+
     # Complete the contract
     print("[INFO] Contract implementation complete")
     tracker.complete_contract(contract_id, coverage=95.5)
-    
+
     # Generate report
     print("\n[INFO] Generating velocity report...")
     report = tracker.generate_markdown_report()
     print(report)
+
 
 if __name__ == "__main__":
     example_contract_implementation()
