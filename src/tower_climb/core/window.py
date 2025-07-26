@@ -5,6 +5,8 @@ from typing import Optional, Tuple
 
 import pygame
 
+from tower_climb import __version__
+
 
 class Window:
     """Game window manager."""
@@ -19,7 +21,7 @@ class Window:
         """
         self.width = width
         self.height = height
-        self.title = title
+        self.title = f"{title} v{__version__}"
         self._screen: Optional[pygame.Surface] = None
         self._clock: Optional[pygame.time.Clock] = None
         self._running = False
