@@ -1,23 +1,34 @@
 # Tower Climb
 
-[![Version](https://img.shields.io/badge/version-0.1.3-blue)](https://github.com/Aeturnis-Development-Labs-LLC/tower-climb)
+[![Version](https://img.shields.io/badge/version-0.1.4-blue)](https://github.com/Aeturnis-Development-Labs-LLC/tower-climb)
 [![Build Status](https://github.com/Aeturnis-Development-Labs-LLC/tower-climb/actions/workflows/ci.yml/badge.svg)](https://github.com/Aeturnis-Development-Labs-LLC/tower-climb/actions)
 [![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](htmlcov/index.html)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org)
 [![CAFE](https://img.shields.io/badge/CAFE-v5.1--ACG-purple)](contracts/)
 
 A roguelike tower climbing game built with CAFE v5.1-ACG methodology.
 
 ## Project Status
-- **Version**: 0.1.3
+- **Version**: 0.1.4
 - **Phase**: 0 - Project Initialization
 - **Methodology**: CAFE v5.1-ACG
 - **Started**: 2025-07-26
-- **Contracts Completed**: 3/9 (P0-S1-C1 ✓, P0-S1-C2 ✓, P0-S1-C3 ✓)
+- **Contracts Completed**: 4/9 (P0-S1-C1 ✓, P0-S1-C2 ✓, P0-S1-C3 ✓, P0-S2-C1 ✓)
 
 ## Overview
 Tower Climb is a procedurally generated tower climbing game where players ascend an infinite tower, facing increasingly difficult challenges.
+
+## ⚠️ Experimental Software Notice
+**This software is EXPERIMENTAL and part of an ongoing methodology research project.**
+
+- 🧪 **Research Purpose**: This is not production software
+- 🔄 **Rapid Changes**: May change substantially without notice
+- 🐛 **Expect Issues**: Contains incomplete features and known bugs
+- 📚 **Educational Use**: Intended for learning and experimentation
+- ❌ **No Support**: No warranty or commercial support provided
+
+**USE AT YOUR OWN RISK**
 
 ## Development Approach
 Following CAFE v5.1-ACG:
