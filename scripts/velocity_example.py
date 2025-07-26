@@ -7,8 +7,9 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).parent.parent))
 
-from scripts.velocity_integration import get_tracker
 import time
+
+from scripts.velocity_integration import get_tracker
 
 
 def example_contract_implementation():

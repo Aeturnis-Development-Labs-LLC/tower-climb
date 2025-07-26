@@ -2,6 +2,7 @@
 """Window management system for Tower Climb."""
 
 from typing import Optional, Tuple
+
 import pygame
 
 

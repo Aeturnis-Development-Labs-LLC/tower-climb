@@ -2,6 +2,7 @@
 """Tests for main entry point."""
 
 import pytest
+
 from tower_climb.__main__ import main
 
 
