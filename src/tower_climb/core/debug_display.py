@@ -79,9 +79,7 @@ class DebugDisplay:
         bg_surface.set_alpha(self._bg_alpha)
 
         # Create final surface with alpha support
-        self._cached_surface = pygame.Surface(
-            (bg_width, bg_height), pygame.SRCALPHA
-        )
+        self._cached_surface = pygame.Surface((bg_width, bg_height), pygame.SRCALPHA)
         self._cached_surface.blit(bg_surface, (0, 0))
         self._cached_surface.blit(text_surface, (self._padding, self._padding))
 

@@ -36,8 +36,7 @@ class FPSCounter:
         self._frame_count += 1
 
         # Remove old frames beyond update interval
-        while (self._accumulated_time > self.update_interval and 
-               self._frame_times):
+        while self._accumulated_time > self.update_interval and self._frame_times:
             old_dt = self._frame_times.popleft()
             self._accumulated_time -= old_dt
             self._frame_count -= 1
